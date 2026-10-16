@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClearBG</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" integrity="sha512-QeR2VH+lsBE5LSAe1Q5EnTBbe7XTBubt8dG93Y7gidSgdMCr8nVqKcfKAMyN96SV8KDbZVTDXChatu5G2KQGzg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home" class="clearbg"><span class="logo">&#10022</span>Clear<span>BG.</span></a>
+        <div class="navlink">
+            <a href="#home">Home</a>
+            <a href="#alltools">All Tools</a>
+            <a href="#use">How to Use</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Home section: background remover workspace -->
+    <section id="home">
+        <div class="maincontent">
+            <div class="heading">
+                <a href="#home">Your Image Workspace</a>
+            </div>
+
+            <div class="img">
+                <!-- Left: upload box and original image -->
+                <div class="imgpng">
+                    <h3>Upload Your Image</h3>
+
+                    <div class="imgbox" id="uploadBox" role="button" tabindex="0" aria-label="Choose an image">
+                        <div class="upload-prompt" id="uploadPrompt">
+                            <h1 class="upicon"><i class="fa-solid fa-upload"></i></h1>
+                            <h2>Drag and Drop an image</h2>
+                            <p>or Click to browse JPG, PNG, WebP</p>
+                            <button type="button" id="chooseImage">Choose image</button>
+                        </div>
+                        <img id="originalImage" class="original-image" alt="Original uploaded image" hidden>
+                        <input id="image" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+                    </div>
+
+                    <p id="uploadHelp">Choose an image to get started.</p>
+                    <button id="remove" type="button" disabled><span>&#10022;</span> Remove Background</button>
+                </div>
+
+                <!-- Right: processed result -->
+                <div class="imgpng">
+                    <h3>Your Result</h3>
+                    <div class="preview" id="preview">
+                        <div class="empty">Your Result Will appear here.</div>
+                    </div>
+                    <p class="muted">Checkerboard means the Background is transparent.</p>
+                    <a href="#" id="download" class="button" download="clearbg.png" hidden>Download PNG</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All tools section -->
+    <section id="alltools"></section>
+
+    <!-- How to use section -->
+    <section id="use">
+        <div class="usesec">
+            <h1>Three Steps. <span>One Clean Result.</span></h1>
+            <p>No complicated editing tools required</p>
+        </div>
+        <div class="usecard">
+            <div class="card">
+                <h2>1</h2>
+                <h1>Upload</h1>
+                <p>Choose a JPEG, PNG or WebP image.</p>
+            </div>
+            <div class="card">
+                <h2>2</h2>
+                <h1>AI Processing</h1>
+                <p>Your image is processed by AI.</p>
+            </div>
+            <div class="card">
+                <h2>3</h2>
+                <h1>Download</h1>
+                <p>Save the result as a transparent PNG.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h1>About <b>Clear<span class="namelogo">BG.</span></b></h1>
+        <h2>Make Every Image Stand Out.</h2>
+        <p class="fep">ClearBG is a simple and user-friendly tool designed to help you remove image backgrounds and create clean, transparent images in just a few clicks.
+        Whether you're designing product photos, creating social media graphics, or building your personal projects, ClearBG helps make your images ready for their next use.</p>
+        <h2>Our Mission</h2>
+        <p class="fep">Our mission is to make background removal simple, accessible, and convenient for everyone — from beginners to creative professionals.</p>
+        <h2>Our Vision</h2>
+        <p class="fep">We aim to make image editing easier by building tools that help everyone bring their creative ideas to life.</p>
+        <h2 class="about-tagline"><b>Clear<span class="namelogo">BG.</span></b> — Clean Images. Clear Creativity.</h2>
+        <h1 class="why-title">Why <b>Clear<span class="namelogo">BG.</span></b></h1>
+        <div class="whyclearbg">
+            <div class="whyclearbg1">
+                <h3>Easy to Use</h3>
+                <p>Remove backgrounds with a simple workflow.</p>
+            </div>
+            <div class="whyclearbg1">
+                <h3>Clean Results</h3>
+                <p>Create images with transparent backgrounds.</p>
+            </div>
+            <div class="whyclearbg1">
+                <h3>Save Time</h3>
+                <p>Simplify your image editing process.</p>
+            </div>
+            <div class="whyclearbg1">
+                <h3>Made for Everyone</h3>
+                <p>Useful for creators, students, designers and businesses.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h1>Contact <b>Clear<span class="namelogo">BG.</span></b></h1>
+        <div class="contactgrid">
+            <div class="form">
+                <h3>Contact Us</h3>
+                <form action="" id="forms">
+                    <input type="text" name="name" class="inputbox" id="name" placeholder="Your Name">
+                    <input type="text" name="ph" class="inputbox" id="ph" placeholder="Your Phone">
+                    <textarea name="msg" class="inputbox1" id="msg" placeholder="Your Msg"></textarea>
+                    <button id="submitbtn" type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="social">
+                <h2>About the Creator - Aalok King</h2>
+                <p>Hi, I'm Aalok King, a passionate web developer who loves building modern, creative, and user-friendly websites. ClearBG is one of my projects, created to make image background removal simple and accessible. I'm continuously learning new technologies and working on ideas that turn into useful digital experiences.</p>
+                <h3>Building ideas into reality, one project at a time.</h3>
+                <div class="sciicons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 <b>Clear<span class="namelogo">BG.</span></b> All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
