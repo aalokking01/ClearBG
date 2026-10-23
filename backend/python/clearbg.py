@@ -3,12 +3,17 @@ import json
 import base64
 import traceback
 
-print("DEBUG: Python worker started", file=sys.stderr, flush=True)
+print("DEBUG: Importing numpy...", file=sys.stderr, flush=True)
+import numpy
+print("DEBUG: numpy OK", file=sys.stderr, flush=True)
 
+print("DEBUG: Importing onnxruntime...", file=sys.stderr, flush=True)
+import onnxruntime
+print("DEBUG: onnxruntime OK", file=sys.stderr, flush=True)
+
+print("DEBUG: Importing rembg...", file=sys.stderr, flush=True)
 from rembg import remove, new_session
-
-print("DEBUG: rembg imported successfully", file=sys.stderr, flush=True)
-
+print("DEBUG: rembg OK", file=sys.stderr, flush=True)
 
 def send_message(message):
     sys.stdout.write(json.dumps(message) + "\n")
