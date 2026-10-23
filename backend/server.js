@@ -1,5 +1,6 @@
 
 const express = require("express");
+const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const { spawn } = require("child_process");
@@ -7,6 +8,9 @@ const readline = require("readline");
 const crypto = require("crypto");
 
 const app = express();
+app.use(cors({
+    origin: "https://aalokking01.github.io"
+}));
 const PORT = process.env.PORT || 3000;
 
 // Frontend files ka folder
