@@ -8,9 +8,11 @@ const readline = require("readline");
 const crypto = require("crypto");
 
 const app = express();
+
 app.use(cors({
     origin: "https://aalokking01.github.io"
 }));
+
 const PORT = process.env.PORT || 3000;
 
 // Frontend files ka folder
@@ -241,7 +243,10 @@ app.get("/", (req, res) => {
   res.json({
     status: "success",
     message: "ClearBG Backend Running",
-    aiReady: workerReady
+    aiReady: workerReady,
+    workerStopped: workerStopped,
+    pythonExitCode: python.exitCode,
+    pythonKilled: python.killed
   });
 });
 // Server start
