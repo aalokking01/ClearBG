@@ -1,3 +1,6 @@
+
+import { removeImageBackground } from "./browser-ai.js";
+
 const imageInput = document.getElementById("image");
 const uploadBox = document.getElementById("uploadBox");
 const uploadPrompt = document.getElementById("uploadPrompt");
@@ -23,7 +26,6 @@ chooseButton.addEventListener("click", (event) => {
 });
 
 uploadBox.addEventListener("click", (event) => {
-    // Any click inside the upload box lets the user choose/replace an image.
     if (event.target !== imageInput) openFilePicker();
 });
 
@@ -46,6 +48,7 @@ uploadBox.addEventListener("dragleave", () => {
 uploadBox.addEventListener("drop", (event) => {
     event.preventDefault();
     uploadBox.classList.remove("drag-over");
+
     if (isProcessing) return;
 
     const file = event.dataTransfer.files[0];
@@ -58,7 +61,11 @@ imageInput.addEventListener("change", () => {
 });
 
 function setSelectedFile(file) {
-    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+    const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ];
 
     if (!allowedTypes.includes(file.type)) {
         alert("Please choose a JPG, PNG, or WebP image.");
@@ -76,70 +83,78 @@ function setSelectedFile(file) {
     originalImage.src = originalUrl;
     originalImage.hidden = false;
     uploadPrompt.hidden = true;
-    uploadHelp.textContent = "Click the image to choose another file.";
+
+    uploadHelp.textContent =
+        "Click the image to choose another file.";
 
     removeButton.disabled = false;
-    removeButton.innerHTML = "<span>&#10022;</span> Remove Background";
+    removeButton.innerHTML =
+        "<span>&#10022;</span> Remove Background";
 
     const empty = document.createElement("div");
     empty.className = "empty";
     empty.textContent = "Your Result Will appear here.";
+
     preview.replaceChildren(empty);
 
     downloadButton.hidden = true;
     downloadButton.removeAttribute("href");
 }
 
+// Browser-based AI background removal
 removeButton.addEventListener("click", async () => {
     if (!selectedFile || isProcessing) return;
 
     isProcessing = true;
     removeButton.disabled = true;
-    removeButton.textContent = "Removing background...";
+    removeButton.textContent = "AI Processing...";
 
     try {
-        const formData = new FormData();
-        formData.append("image", selectedFile);
+        // AI runs locally in the user's browser
+        const newResultUrl =
+            await removeImageBackground(selectedFile);
 
-        const response = await fetch("https://clearbg-backendweb.onrender.com/api/remove-bg", {
-            method: "POST",
-            body: formData
-        });
-
-        if (!response.ok) {
-            const data = await response.json().catch(() => ({}));
-            throw new Error(data.error || "Background removal failed.");
-        }
-
-        const blob = await response.blob();
         if (resultUrl) URL.revokeObjectURL(resultUrl);
-        resultUrl = URL.createObjectURL(blob);
+        resultUrl = newResultUrl;
 
         const resultImage = document.createElement("img");
         resultImage.src = resultUrl;
         resultImage.alt = "Background removed result";
+
         preview.replaceChildren(resultImage);
 
         downloadButton.href = resultUrl;
         downloadButton.download = "clearbg.png";
         downloadButton.hidden = false;
+
     } catch (error) {
-        alert(error.message);
+        console.error("ClearBG AI Error:", error);
+        alert(
+            "Background removal failed: " +
+            (error.message || "Unknown error")
+        );
     } finally {
         isProcessing = false;
         removeButton.disabled = !selectedFile;
-        removeButton.innerHTML = "<span>&#10022;</span> Remove Background";
+        removeButton.innerHTML =
+            "<span>&#10022;</span> Remove Background";
     }
 });
 
-// Keep the contact form from reloading the page until it has a backend.
-document.getElementById("forms").addEventListener("submit", (event) => {
-    event.preventDefault();
-    alert("Thanks for your message! Contact form delivery is not connected yet.");
-});
+// Contact form
+const contactForm = document.getElementById("forms");
 
+if (contactForm) {
+    contactForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        alert(
+            "Thanks for your message! Contact form delivery is not connected yet."
+        );
+    });
+}
+
+// Clean temporary image URLs
 window.addEventListener("beforeunload", () => {
     if (originalUrl) URL.revokeObjectURL(originalUrl);
     if (resultUrl) URL.revokeObjectURL(resultUrl);
 });
-
