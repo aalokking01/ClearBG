@@ -7,18 +7,17 @@ const readline = require("readline");
 const crypto = require("crypto");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Frontend files ka folder
 const projectDir = path.join(__dirname, "..");
 
 // Python 3.11 virtual environment
-const pythonExe = path.join(
-  __dirname,
-  ".venv311",
-  "Scripts",
-  "python.exe"
-);
+const pythonExe =
+  process.env.PYTHON_EXECUTABLE ||
+  (process.platform === "win32"
+    ? path.join(__dirname, ".venv311", "Scripts", "python.exe")
+    : "python3");
 
 const pythonScript = path.join(
   __dirname,
@@ -234,7 +233,13 @@ app.use((err, req, res, next) => {
     error: err.message || "Something went wrong."
   });
 });
-
+app.get("/", (req, res) => {
+  res.json({
+    status: "success",
+    message: "ClearBG Backend Running",
+    aiReady: workerReady
+  });
+});
 // Server start
 app.listen(PORT, () => {
   console.log(`ClearBG running at http://localhost:${PORT}`);
