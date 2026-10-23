@@ -14,7 +14,7 @@ def send_message(message):
 
 def main():
     # AI model sirf ek baar load hoga
-    session = new_session("u2net")
+    session = new_session("u2netp")
     send_message({"ready": True})
 
     for line in sys.stdin:
@@ -44,3 +44,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
