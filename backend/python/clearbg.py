@@ -1,10 +1,13 @@
-
 import sys
 import json
 import base64
 import traceback
 
+print("DEBUG: Python worker started", file=sys.stderr, flush=True)
+
 from rembg import remove, new_session
+
+print("DEBUG: rembg imported successfully", file=sys.stderr, flush=True)
 
 
 def send_message(message):
@@ -13,8 +16,12 @@ def send_message(message):
 
 
 def main():
-    # AI model sirf ek baar load hoga
+    print("DEBUG: Loading u2netp model...", file=sys.stderr, flush=True)
+
     session = new_session("u2netp")
+
+    print("DEBUG: AI model loaded successfully!", file=sys.stderr, flush=True)
+
     send_message({"ready": True})
 
     for line in sys.stdin:
@@ -25,7 +32,6 @@ def main():
             request_id = request.get("id")
             image_data = base64.b64decode(request["image"])
 
-            # Wahi model har image ke liye reuse hoga
             result = remove(image_data, session=session)
 
             send_message({
@@ -43,5 +49,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-
+    try:
+        main()
+    except Exception:
+        traceback.print_exc(file=sys.stderr)
+        sys.exit(1)
