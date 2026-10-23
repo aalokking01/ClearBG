@@ -101,7 +101,7 @@ removeButton.addEventListener("click", async () => {
         const formData = new FormData();
         formData.append("image", selectedFile);
 
-        const response = await fetch("/api/remove-bg", {
+        const response = await fetch("https://clearbg-backendweb.onrender.com/api/remove-bg", {
             method: "POST",
             body: formData
         });
@@ -142,3 +142,4 @@ window.addEventListener("beforeunload", () => {
     if (originalUrl) URL.revokeObjectURL(originalUrl);
     if (resultUrl) URL.revokeObjectURL(resultUrl);
 });
+
